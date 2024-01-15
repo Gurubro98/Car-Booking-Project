@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h5 class="modal-title">TimeZone</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="timezoneForm">
+    <p-dropdown
+      formControlName="timezone"
+      [options]="timezones"
+      [(ngModel)]="selectedTimezone"
+      optionLabel="name"
+      [showClear]="true"
+      placeholder="Select a TimeZone"
+    ></p-dropdown>
+    <div
+      *ngIf="
+        timezoneForm.controls['timezone'].dirty &&
+        timezoneForm.hasError('required', 'timezone')
+      "
+      class="text-danger"
+    >
+      *Timezone is required
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="onSelectTimezone()">
+    Save changes
+  </button>
+</div>

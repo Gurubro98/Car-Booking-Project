@@ -1,0 +1,77 @@
+<div class="modal-header">
+  <h5 class="modal-title">Booking</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="onClose()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="bookingForm">
+    <div class="mb-3">
+      <p-dropdown
+        [options]="companies"
+        (onChange)="getCarName($event)"
+        formControlName="companyId"
+        optionLabel="companyName"
+        optionValue="companyName"
+        placeholder="Select a Company"
+      ></p-dropdown>
+    </div>
+
+    <div class="mb-3" *ngIf="disable">
+      <p-dropdown
+        [options]="cars"
+        (onChange)="getCar($event)"
+        formControlName="carId"
+        optionLabel="carName"
+        [(ngModel)]="selectedCar"
+        placeholder="Select a Car"
+      ></p-dropdown>
+    </div>
+    <div class="mb-3 d-flex" *ngIf="selectedCar">
+      <div class="showDate mr-3">
+        {{ convertToLocalTime(this.selectedCar.startDate) }}
+      </div>
+      <div class="showDate">
+        {{ convertToLocalTime(this.selectedCar.endDate) }}
+      </div>
+    </div>
+    <div class="mb-3" *ngIf="selectedCar">
+      <label class="form-label">Select Booking Date</label><br />
+      <p-calendar
+        formControlName="dateRange"
+        selectionMode="range"
+        [minDate]="minDate"
+        [maxDate]="maxDate"
+        [showTime]="true"
+        [minDate]="currentDate"
+        [(ngModel)]="selectedDate"
+        (ngModelChange)="getDate()"
+        [readonlyInput]="true"
+      ></p-calendar>
+    </div>
+    <div class="mb-3" *ngIf="selectedDate">
+      <label class="form-label">Total Price</label><br />
+      <div class="showDate">
+        {{ selectedCar.fare }}(/hr) * {{ hoursDifference | number : "1.2-2" }} =
+        {{ totalFare | number : "1.2-2" }}
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    data-bs-dismiss="modal"
+    (click)="onClose()"
+  >
+    Close
+  </button>
+  <button type="button" class="btn btn-primary" (click)="onBookingCar()">
+    Add Booking
+  </button>
+</div>

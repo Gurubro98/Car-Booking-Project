@@ -1,0 +1,119 @@
+<div class="container">
+  <div class="content-center">
+    <div class="row signup-form">
+      <div class="col-md-10 mt-4">
+        <h4 class="mt-4 text-center">Register Page</h4>
+        <form [formGroup]="signupForm">
+          <div class="field-space">
+            <label for="name">Name</label><br />
+            <input type="text" pInputText formControlName="Name" />
+
+            <div
+              *ngIf="
+                f['Name'].invalid && (f['Name'].dirty || f['Name'].touched)
+              "
+            >
+              <div class="text-danger" *ngIf="f['Name'].errors?.['required']">
+                *Name is required.
+              </div>
+              <div class="text-danger" *ngIf="f['Name'].errors?.['minlength']">
+                *Name must be contains atleast 3 characters.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['Name'].errors?.['pattern'] && !f['Name'].errors?.['minlength']"
+              >
+                *Name should be contains letters only.
+              </div>
+              <div class="text-danger" *ngIf="f['Name'].errors?.['maxlength']">
+                *Name should not be greater than 20 characters.
+              </div>
+            </div>
+          </div>
+          <div class="field-space">
+            <label for="Email">Email address</label><br />
+            <input type="Email" pInputText formControlName="Email" />
+
+            <div
+              *ngIf="
+                f['Email'].invalid && (f['Email'].dirty || f['Email'].touched)
+              "
+            >
+              <div class="text-danger" *ngIf="f['Email'].errors?.['required']">
+                *Email is required.
+              </div>
+              <div class="text-danger" *ngIf="f['Email'].errors?.['pattern']">
+                *Please enter your valid Email.
+              </div>
+            </div>
+          </div>
+
+          <div class="field-space">
+            <label for="Password">Password</label><br />
+            <p-password
+              formControlName="Password"
+              [toggleMask]="true"
+            ></p-password>
+
+            <div
+              *ngIf="
+                f['Password'].invalid &&
+                (f['Password'].dirty || f['Password'].touched)
+              "
+            >
+              <div
+                class="text-danger"
+                *ngIf="f['Password'].errors?.['required']"
+              >
+                *Password is required.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['Password'].errors?.['minlength']"
+              >
+                *Password must be contains atleast 7 characters.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['Password'].errors?.['pattern'] && !f['Password'].errors?.['minlength']"
+              >
+                *Password should be contain one uppercase, one lowercase, digit
+                and special Symbol.
+              </div>
+            </div>
+          </div>
+          <div class="field-space">
+            <label for="ConfirmPassword">Confirm Password</label><br />
+            <p-password
+              formControlName="ConfirmPassword"
+              [toggleMask]="true"
+            ></p-password>
+
+            <div
+              *ngIf="
+                f['ConfirmPassword'].invalid &&
+                (f['ConfirmPassword'].dirty || f['ConfirmPassword'].touched)
+              "
+            >
+              <div
+                class="text-danger"
+                *ngIf="f['ConfirmPassword'].errors?.['required']"
+              >
+                *Confirm Password is required.
+              </div>
+              <div
+                class="text-danger"
+                *ngIf="f['ConfirmPassword'].errors?.['ConfirmedValidator']"
+              >
+                *Confirm Password and Password not match.
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <p-button label="Signup" (click)="onSignUp()"></p-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="d-flex justify-content-end mt-3">
+    <p-button label="Add" (click)="onBooking()"></p-button>
+  </div>
+
+  <h3 class="text-center">Bookings</h3>
+  <div>
+    <div
+      class="card flex justify-content-center mt-5 mb-5"
+      *ngFor="let item of bookingData"
+    >
+      <p-card header="{{ item.car.carName }}">
+        <p class="m-0 mb-2">
+          {{ item.company.companyName }}
+        </p>
+        <p class="m-0 mb-2">
+          <b>Car Number:</b> <br />
+          {{ item.car.number }}
+        </p>
+        <p class="m-0 mb-2">
+          <b>Remaining Slots:</b> <br />
+          {{ item.car.slots }}
+        </p>
+        <p class="m-0 mb-2">
+          <b>Booking Date :</b> <br />
+          {{ item.startDate | date : "dd/MM/YYYY" }}
+          {{ item.startDate | date : "hh:mm" }} -
+          {{ item.endDate | date : "dd/MM/YYYY" }}
+          {{ item.endDate | date : "hh:mm" }}
+        </p>
+        <p class="m-0 mb-2">
+          <b>Total Price</b>
+          <br />
+          {{ item.totalPrice }}
+        </p>
+      </p-card>
+    </div>
+  </div>
+</div>

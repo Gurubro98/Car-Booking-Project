@@ -1,0 +1,17 @@
+input {
+  width: 100%;
+}
+
+::ng-deep p-dropdown > div {
+  width: 100%;
+}
+
+::ng-deep p-calendar span {
+  width: 100%;
+}
+
+.showDate{
+    border: 1.5px solid black;
+    border-radius: 10px;
+    padding: 14px;
+}

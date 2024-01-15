@@ -1,0 +1,29 @@
+::ng-deep p-password input {
+  width: 100%;
+}
+
+::ng-deep input {
+  width: 100%;
+}
+
+::ng-deep p-password div {
+  width: 100%;
+}
+
+::ng-deep p-button button {
+  width: 100%;
+}
+
+.signup-form {
+  display: flex;
+    justify-content: center;
+  
+  width: 50%;
+  padding: 20px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+h4 {
+  text-align: center;
+  font-size: 1.3rem;
+}

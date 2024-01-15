@@ -1,0 +1,139 @@
+<div class="modal-header">
+  <h5 class="modal-title">Create Car booking</h5>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="modal"
+    aria-label="Close"
+    (click)="onClose()"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="carBookingForm">
+    <div>
+      <input type="hidden" pInputText formControlName="carId" />
+    </div>
+    <div class="form-group mb-3">
+      <label class="form-label">Company</label><br />
+      <p-dropdown
+        [options]="companies"
+        formControlName="companyId"
+        optionLabel="companyName"
+        optionValue="id"
+        placeholder="Select a Company"
+      ></p-dropdown>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">Car Name</label><br />
+      <input type="text" pInputText formControlName="carName" />
+      <div
+        *ngIf="
+          f['carName'].invalid && (f['carName'].dirty || f['carName'].touched)
+        "
+      >
+        <div class="text-danger" *ngIf="f['carName'].errors?.['required']">
+          *Car Name is required.
+        </div>
+        <div class="text-danger" *ngIf="f['carName'].errors?.['minlength']">
+          *Car Name must be contains atleast 3 characters.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['carName'].errors?.['pattern'] && !f['carName'].errors?.['minlength']"
+        >
+          *Car Name should be contains letters only.
+        </div>
+        <div class="text-danger" *ngIf="f['carName'].errors?.['maxlength']">
+          *Car Name should not be greater than 30 characters.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">Car number</label><br />
+      <p-inputMask mask="a* a9 9999" formControlName="number"></p-inputMask>
+      <div
+        *ngIf="
+          f['number'].invalid && (f['number'].dirty || f['number'].touched)
+        "
+      >
+        <div class="text-danger" *ngIf="f['number'].errors?.['required']">
+          *Car number is required.
+        </div>
+        <div class="text-danger" *ngIf="f['number'].errors?.['minlength']">
+          *Car number must be contains atleast 3 characters.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="f['number'].errors?.['pattern'] && !f['number'].errors?.['minlength']"
+        >
+          *Car number should be contains letters only.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">availability</label><br />
+      <p-calendar
+        formControlName="availability"
+        selectionMode="range"
+        [minDate]="currentDate"
+        [showTime]="true"
+        [readonlyInput]="true"
+      ></p-calendar>
+      <div
+        *ngIf="
+          f['availability'].invalid &&
+          (f['availability'].dirty || f['availability'].touched)
+        "
+      >
+        <div class="text-danger" *ngIf="f['availability'].errors?.['required']">
+          *Availability is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label class="form-label">slots</label><br />
+      <input pInputText [type]="'number'" formControlName="slots" />
+      <div
+        *ngIf="f['slots'].invalid && (f['slots'].dirty || f['slots'].touched)"
+      >
+        <div class="text-danger" *ngIf="f['slots'].errors?.['required']">
+          *Car slots is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">fare</label><br />
+      <input pInputText [type]="'number'" formControlName="fare" />
+      <div *ngIf="f['fare'].invalid && (f['fare'].dirty || f['fare'].touched)">
+        <div class="text-danger" *ngIf="f['fare'].errors?.['required']">
+          *Fare price is required.
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <input type="hidden" pInputText formControlName="userId" />
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    data-bs-dismiss="modal"
+    (click)="onClose()"
+  >
+    Close
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    (click)="!this.carId ? onCreateCar() : onUpdateCar()"
+  >
+    Create
+  </button>
+</div>
